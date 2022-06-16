@@ -18,7 +18,13 @@ fun LoginScreen(navController: NavController){
     var userTextFieldState by remember {
         mutableStateOf("")
     }
-    var avviso = ""
+    var passwordTextFieldState by remember {
+        mutableStateOf("")
+    }
+
+    var avviso by remember {
+        mutableStateOf("")
+    }
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -34,20 +40,36 @@ fun LoginScreen(navController: NavController){
             },
             onValueChange = {
                 userTextFieldState = it
+                avviso = ""
             },
             singleLine = true
         )
         Spacer(modifier = Modifier.height(8.dp))
+        TextField(
+            value = passwordTextFieldState,
+            label = {
+                Text("password")
+            },
+            onValueChange = {
+                passwordTextFieldState = it
+            },
+            singleLine = true
+        )
 
         Button(
             onClick = {
                 if(userTextFieldState != ""){
                     navController.navigate(Screen.MainScreen.route)
                 }
+                avviso = "compila campi"
             },
             modifier = Modifier.align(Alignment.End)
         ) {
             Text(text = "login")
+
+        }
+        if (avviso!= ""){
+            Text(text = avviso)
         }
 
     }

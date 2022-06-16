@@ -8,6 +8,7 @@ sealed class Screen(val route: String){
     object DaySelectorScreen: Screen(route = "day_selector_screen")
     object TurnSelectorScreen: Screen(route = "turn_selector_screen")
     object ConfirmationScreen: Screen(route = "confirmation_screen")
+    object RecapScreen: Screen(route = "recap_screen")
 
 
     fun withArgs( vararg args: String): String{

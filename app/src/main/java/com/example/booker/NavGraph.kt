@@ -47,6 +47,12 @@ fun SetupNavGraph(navController: NavHostController){
         ) {
             ReservationScreen(navController)
         }
+        composable(
+            route = com.example.booker.Screen.RecapScreen.route
+        ) {
+            RecapScreen(navController)
+        }
+
     }
 
 }
