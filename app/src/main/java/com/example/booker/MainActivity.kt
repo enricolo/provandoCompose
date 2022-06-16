@@ -32,57 +32,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Password() {
-
-}
-
-@Composable
-fun Username() {
-
-}
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-
-    var userTextFieldState by remember {
-        mutableStateOf("")
-    }
-    var passwordTextFieldState by remember {
-        mutableStateOf("")
-    }
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-
-            .background(Color.Green),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement =Arrangement.Center
-    ){
-        TextField(
-            value = userTextFieldState,
-            label = {
-                Text("username")
-            },
-            onValueChange = {
-                userTextFieldState = it
-            },
-            singleLine = true
-        )
-        Spacer(modifier = Modifier.height(50.dp))
-        TextField(
-            value = passwordTextFieldState,
-            label = {
-                Text("password")
-            },
-            onValueChange = {
-                passwordTextFieldState = it
-            },
-            singleLine = true
-        )
-    }
-
-
 }

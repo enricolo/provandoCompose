@@ -1,9 +1,7 @@
 package com.example.booker.screens
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
@@ -17,7 +15,13 @@ import com.example.booker.Screen
 @Composable
 fun DaySelectorScreen(navController: NavController){
 
-    Column() {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+    ) {
 
 
         Box(
@@ -26,9 +30,10 @@ fun DaySelectorScreen(navController: NavController){
             contentAlignment = Alignment.TopCenter
         ){
             Text(
-                modifier = Modifier.clickable {
+                modifier = Modifier
+                    .clickable {
                     navController.navigate(route = Screen.TurnSelectorScreen.route)
-                },
+                    },
                 fontSize = MaterialTheme.typography.h3.fontSize,
                 text = "DaySelectorScreen ")
 

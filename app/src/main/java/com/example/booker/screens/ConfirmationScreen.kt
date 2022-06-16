@@ -25,7 +25,6 @@ fun ConfirmationScreen(navController: NavController){
             .fillMaxSize(1f)
     ){
         Column(
-
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.2f),

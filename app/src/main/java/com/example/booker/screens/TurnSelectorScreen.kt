@@ -24,8 +24,11 @@ import kotlin.math.round
 fun TurnSelectorScreen(navController: NavController){
 
     Column(
-        modifier = Modifier.padding(16.dp),
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
     ) {
         Box(
 
