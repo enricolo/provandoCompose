@@ -1,3 +1,8 @@
 package com.example.booker.data
 
-data class UserReservation()
+class UserReservation{
+    companion object{
+        lateinit var day : String
+        lateinit var turn : String
+    }
+}

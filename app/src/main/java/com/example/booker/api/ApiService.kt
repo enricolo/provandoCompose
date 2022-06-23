@@ -1,85 +1,65 @@
 package com.example.moviematch.api
 
 
-import com.example.booker.model.Reservation
+import com.example.booker.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
 
 interface ApiService {
 
-    @FormUrlEncoded
-    @POST("/createUser/?")
-    suspend fun createUser(
-        @Field("username") username: String
-    ): Response<String>
 
-    @GET("getMovies/?")
-    suspend fun getMovies(
-        @Query("roomId") roomId: Int
-    ): Response<String>
+    @GET("/isUpdated?")
+    suspend fun isUpdated(
+        @Query("version") version: String
+    ): Response<GetTurnsResponse>
 
-    @FormUrlEncoded
-    @POST("/createNewRoom/?")
-    suspend fun setNewRoom(
-        @Field("username") username: String
-    ): Response<String>
+    @GET("/login?")
+    suspend fun login(
+        @Query("email") email: String,
+        @Query("password") password: String
+    ): Response<loginResponse>
+
 
     @FormUrlEncoded
-    @POST("/enterRoom/?")
-    suspend fun setRoom(
-        @Field("username") username: String,
-        @Field("roomId") roomId: Int
+    @POST("/signUp?")
+    suspend fun signUp(
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("name") name: String,
+        @Field("surname") surname: String,
+        @Field("distance") distance: Int
     ): Response<String>
 
-    @FormUrlEncoded
-    @POST("/setGenres/?")
-    suspend fun setGenre(
-        @Field("roomId") roomId: Int,
-        @Field("genreList") genre: List<String>
-    ): Response<String>
-
-    @GET("getGenres/?")
-    suspend fun getGenres(
-//        @Query("roomId") roomId: Int
-    ): Response<String>
-
-    @FormUrlEncoded
-    @POST("/rateMovie/?")
-    suspend fun addLikedMovie(
-        @Field("userId") userId: Long,
-        @Field("roomId") roomId: Int,
-        @Field("movieId") movieId: String,
-        @Field("liked") liked: Boolean
-    ): Response<String>
-
-
-    @GET("/findMatch/?")
-    suspend fun findMatch(
-        @Query("roomId") roomId: Int
-    ): Response<String>
-
-
-    @GET("/getMatchedMovies/?")
-    suspend fun getMatchedMovies(
-        @Query("roomId") roomId: Int
-    ): Response<String>
-
-    @GET("/isRoomReady/?")
-    suspend fun isRoomReady(
-        @Query("userId") userId: Long,
-        @Query("roomId") roomId: Int
-    ): Response<String>
-
-    @FormUrlEncoded
-    @POST("/setReady/?")
-    suspend fun setReady(
-        @Field("userId") userId: Long,
-        @Field("roomId") roomId: Int)
-
-
-    @GET("/isRoomReady/?")
-    suspend fun getReservations(
-        @Query("userame") userame: String
+    @GET("/getDayReservations?")
+    suspend fun getDayReservations(
+        @Query("date") date : Long
     ): Response<GetReservationResponse>
+
+    @GET("/getReservations?")
+    suspend fun getReservations(
+        @Query("email") email: String
+    ): Response<GetReservationResponse>
+
+
+    @GET("/getDays?")
+    suspend fun getDays(
+        @Query("minDate") minDate: Long,
+        @Query("maxDate") maxDate: Long
+    ): Response<GetDaysResponse>
+
+    @GET("/getTurns?")
+    suspend fun getTurns(
+    ): Response<GetTurnsResponse>
+
+
+    @FormUrlEncoded
+    @POST("/setReservation?")
+    suspend fun setReservation(
+        @Field("email") email: String,
+        @Field("date") name: String,
+        @Field("turn") surname: String
+    ): Response<String>
+
+
 }

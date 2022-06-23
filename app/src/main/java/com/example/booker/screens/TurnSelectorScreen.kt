@@ -18,13 +18,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.booker.Screen
+import com.example.booker.data.UserReservation
 import com.example.booker.viewModel.TurnSelectorScreenViewModel
 
 @Composable
 fun TurnSelectorScreen(navController: NavController){
 
     val viewModel = TurnSelectorScreenViewModel()
-    viewModel.setTurns()
+    viewModel.getTurns()
     val turns: List<String> by viewModel.turns.observeAsState(listOf(""))
 
     Column(
@@ -54,6 +55,7 @@ fun TurnSelectorScreen(navController: NavController){
                 Text(
                     modifier = Modifier
                         .clickable {
+                            UserReservation.turn = turn
                             navController.navigate(route = Screen.ConfirmationScreen.route)
                         }
                         .padding(15.dp)

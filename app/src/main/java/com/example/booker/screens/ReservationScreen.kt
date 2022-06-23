@@ -28,6 +28,7 @@ fun ReservationScreen(navController: NavController){
 
     val viewModel = ReservationScreenViewModel()
     viewModel.getReservations()
+//    val reservations: List<Reservation> by viewModel.reservations.observeAsState(listOf(Reservation("", "", -1)))
     val reservations: List<Reservation> by viewModel.reservations.observeAsState(listOf(Reservation("", "", -1)))
 
 //    val reservations: List<List<Reservation>> by viewModel.getReservationResponse.observeAsState()

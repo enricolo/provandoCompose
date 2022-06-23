@@ -3,6 +3,7 @@ package com.example.booker
 sealed class Screen(val route: String){
     object FirstScreen: Screen(route = "first_screen")
     object LoginScreen: Screen(route = "login_screen")
+    object RegistrationScreen: Screen(route = "registration_screen")
     object MainScreen: Screen(route = "main_screen")
     object ReservationScreen: Screen(route = "reservation_screen")
     object DaySelectorScreen: Screen(route = "day_selector_screen")

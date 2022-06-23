@@ -13,27 +13,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.booker.Screen
+import com.example.booker.data.UserReservation
+import com.example.booker.model.Day
 import com.example.booker.viewModel.DaySelectorScreenViewModel
-import com.example.booker.viewModel.LoginScreenViewModel
-import java.util.*
 
 @Composable
 fun DaySelectorScreen(navController: NavController){
 
     val viewModel = DaySelectorScreenViewModel()
-//    val days = listOf<String>("lun 1", "mar2", "mer3","gio 4", "ven 5", "sab 6","dom 7","lun 1", "mar2", "mer3","gio 4", "ven 5", "sab 6","dom 7","lun 1", "mar2", "mer3","gio 4", "ven 5", "sab 6","dom 7")
-    viewModel.setDays()
-    val days: List<String> by viewModel.days.observeAsState(listOf(""))
 
-    val cal: Calendar = Calendar.getInstance()
-    cal.add(Calendar.MONTH, 1) //add a month
-    cal.set(Calendar.HOUR_OF_DAY, 23) //set hour to last hour
-    cal.set(Calendar.MINUTE, 59) //set minutes to last minute
-    cal.set(Calendar.SECOND, 59) //set seconds to last second
-    cal.set(Calendar.MILLISECOND, 999) //set milliseconds to last millisecond
-
-
-    val millis: Long = cal.timeInMillis
+    viewModel.getDays()
+    val days: List<Day> by viewModel.days.observeAsState(listOf(Day("", "")))
 
 
 
@@ -54,7 +44,8 @@ fun DaySelectorScreen(navController: NavController){
             Text(
                 modifier = Modifier
                     .clickable {
-                    navController.navigate(route = Screen.TurnSelectorScreen.route)
+
+                        navController.navigate(route = Screen.TurnSelectorScreen.route)
                     },
                 fontSize = MaterialTheme.typography.h3.fontSize,
                 text = "DaySelectorScreen ")
@@ -65,9 +56,10 @@ fun DaySelectorScreen(navController: NavController){
             items(items = days){
                 Text(
                     modifier = Modifier.clickable {
+                        UserReservation.day = it.day
                         navController.navigate(route = Screen.TurnSelectorScreen.route)
                     },
-                    text = it,
+                    text = it.weekDay + " " + it.day,
                     fontSize = MaterialTheme.typography.h4.fontSize
                 )
             }

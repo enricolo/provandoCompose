@@ -1,7 +1,6 @@
 package com.example.moviematch.repository
 
-import com.example.booker.model.GetReservationResponse
-import com.example.booker.model.Reservation
+import com.example.booker.model.*
 import com.example.moviematch.api.RetrofitInstance
 import retrofit2.Response
 
@@ -10,13 +9,26 @@ class Repository {
 
 
 
-    suspend fun getReservations(userame:String): Response<GetReservationResponse> {
-        return RetrofitInstance.api.getReservations(userame)
+    suspend fun getReservations(username:String): Response<GetReservationResponse> {
+        return RetrofitInstance.api.getReservations(username)
     }
-//
-//    suspend fun createUser(username:String): Response<String> {
-//        return RetrofitInstance.api.createUser(username)
-//    }
+
+    suspend fun getDays(minDate:Long, maxDate:Long): Response<GetDaysResponse> {
+        return RetrofitInstance.api.getDays(minDate, maxDate)
+    }
+
+    suspend fun getTurns(): Response<GetTurnsResponse> {
+        return RetrofitInstance.api.getTurns()
+    }
+
+    suspend fun login(email : String, password : String): Response<loginResponse> {
+        return RetrofitInstance.api.login(email, password)
+    }
+    suspend fun getVersion(version : String): Response<GetTurnsResponse> {
+        return RetrofitInstance.api.isUpdated(version)
+    }
+
+
 //
 //    suspend fun setNewRoom(username:String): Response<String> {
 //        return RetrofitInstance.api.setNewRoom(username)

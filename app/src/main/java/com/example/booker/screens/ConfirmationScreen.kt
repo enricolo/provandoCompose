@@ -13,10 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.booker.ReservationItem
 import com.example.booker.Screen
+import com.example.booker.data.User
+import com.example.booker.data.UserReservation
 import com.example.booker.repository.ReservationRepository
+import com.example.booker.viewModel.LoginScreenViewModel
 
 @Composable
 fun ConfirmationScreen(navController: NavController){
+
+    val viewModel = LoginScreenViewModel()
 
     val reservationRepository = ReservationRepository()
     val getAllData = reservationRepository.getAllData()
@@ -32,13 +37,13 @@ fun ConfirmationScreen(navController: NavController){
         ){
             Text(
                 fontSize = MaterialTheme.typography.h4.fontSize,
-                text = "nome ")
+                text = User.email)
             Text(
                 fontSize = MaterialTheme.typography.h4.fontSize,
-                text = "stanza ")
+                text = UserReservation.day)
             Text(
                 fontSize = MaterialTheme.typography.h4.fontSize,
-                text = "turno ")
+                text = UserReservation.turn)
 
 
 

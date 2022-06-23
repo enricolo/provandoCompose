@@ -27,10 +27,7 @@ fun ReservationItem(reservation: Reservation) {
             .background(Color.Green)
     ) {
         Text(
-            text = reservation.giorno,
-            fontSize = MaterialTheme.typography.h5.fontSize
-        )
-        Text(text = reservation.nome,
+            text = reservation.turno,
             fontSize = MaterialTheme.typography.h5.fontSize
         )
         Text(text = reservation.stanza,

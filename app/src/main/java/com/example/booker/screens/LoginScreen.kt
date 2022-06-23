@@ -1,34 +1,28 @@
 package com.example.booker.screens
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.booker.Password
 import com.example.booker.Screen
+import com.example.booker.UserName
 import com.example.booker.data.User
+import com.example.booker.model.Reservation
+import com.example.booker.model.loginResponse
 import com.example.booker.viewModel.LoginScreenViewModel
 
 
 @Composable
 fun LoginScreen(navController: NavController){
 
-    val viewModel = LoginScreenViewModel()
 
-//    val userName: String by viewModel.name.observeAsState("")
+
+    val viewModel = LoginScreenViewModel()
 
     var userTextFieldState by remember {
         mutableStateOf("")
@@ -37,8 +31,22 @@ fun LoginScreen(navController: NavController){
         mutableStateOf("")
     }
 
+    var loginstato by remember {
+        mutableStateOf(false)
+    }
+
+    var loginStato by remember {
+        mutableStateOf(false)
+    }
+
+    val loginState: Boolean by viewModel.loginResponse.observeAsState(false)
+
     var avviso by remember {
         mutableStateOf("")
+    }
+
+    Column() {
+
     }
 
     Column(
@@ -49,7 +57,7 @@ fun LoginScreen(navController: NavController){
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
-        UserName(userName = userTextFieldState, onUserNameChange = {userTextFieldState = it})
+        UserName(userName = userTextFieldState,label = "username", onUserNameChange = {userTextFieldState = it})
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -66,8 +74,10 @@ fun LoginScreen(navController: NavController){
 //                    avviso += "compila password"
 //                }
 //                else {
-                User.username = userTextFieldState
-                    navController.navigate(Screen.MainScreen.route)
+
+                viewModel.login(userTextFieldState, passwordTextFieldState)
+
+
 //                }
             },
             modifier = Modifier
@@ -81,55 +91,15 @@ fun LoginScreen(navController: NavController){
             Text(text = avviso)
         }
 
-    }
-}
+        if(loginState && ! loginStato){ //TODO guarda come fare sta cosa senza il check
+            Text(text = "trasferisco")
 
+            navController.navigate(Screen.MainScreen.route)
+            loginStato = true
 
-@Composable
-fun UserName(userName : String, onUserNameChange: (String) -> Unit){
-
-    TextField(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(15.dp)),
-        value = userName,
-        label = {
-            Text("username")
-        },
-
-        onValueChange = onUserNameChange,
-        singleLine = true
-    )
-}
-
-
-@Composable
-fun Password(password: String, onPasswordChange : (String) -> Unit){
-//    var password by rememberSaveable { mutableStateOf("") }
-    var passwordVisible by rememberSaveable { mutableStateOf(false) }
-
-    TextField(
-        value = password,
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(15.dp)),
-        onValueChange = onPasswordChange,
-        label = { Text("Password") },
-        singleLine = true,
-        placeholder = { Text("Password") },
-        visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        trailingIcon = {
-            val image = if (passwordVisible)
-                Icons.Filled.Visibility
-            else Icons.Filled.VisibilityOff
-
-            // Please provide localized description for accessibility services
-            val description = if (passwordVisible) "Hide password" else "Show password"
-
-            IconButton(onClick = {passwordVisible = !passwordVisible}){
-                Icon(imageVector  = image, description)
-            }
         }
-    )
+
+    }
+
 }
+

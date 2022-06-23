@@ -8,9 +8,18 @@ import com.example.booker.screens.*
 
 @Composable
 fun SetupNavGraph(navController: NavHostController){
+
+    var start = Screen.FirstScreen.route
+    if (false){
+        start = Screen.MainScreen.route
+    }
+
     NavHost(
         navController = navController,
-        startDestination = Screen.FirstScreen.route
+
+        startDestination = start
+
+
     ) {
         composable(
             route = Screen.FirstScreen.route
@@ -21,6 +30,11 @@ fun SetupNavGraph(navController: NavHostController){
             route = com.example.booker.Screen.LoginScreen.route
         ) {
             LoginScreen(navController)
+        }
+        composable(
+            route = com.example.booker.Screen.RegistrationScreen.route
+        ) {
+            RegistrationScreen(navController)
         }
         composable(
             route = com.example.booker.Screen.MainScreen.route
